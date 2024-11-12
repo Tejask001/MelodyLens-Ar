@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Song Selection</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+    body {
+      font-family: Kanit;
+      font-weight: 400;
+      font-style: normal;
+      background-color: #29062f;
+      /* Slightly lighter background for the whole page */
+      color: white;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="text-white">
+  <!-- Navbar -->
+  <nav class="bg-[rgba(14,0,29,1)] shadow-md">
+    <div class="container mx-auto py-4 text-center">
+      <a href="#" class="inline-block">
+        <img src="./assets/images/MelodyLens.png" alt="Logo" class="w-40 h-24 inline-block">
+      </a>
+    </div>
+  </nav>
+
+  <!-- Song Cards -->
+  <div class="container mx-auto mt-10 mb-10 px-4">
+    <h1 class="text-center text-5xl mb-12">Select a Song</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Song 1 -->
+      <div class="col px-10">
+        <div class="card bg-[#07000f] text-white rounded-xl transition-transform cursor-pointer"
+          onclick="selectSong('attention')">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Charlie_Puth_-_Attention_%28Official_Single_Cover%29.png"
+            alt="Album Cover 1" class="w-full rounded-t-xl">
+          <div class="p-4 bg-[rgba(255,255,255,0.1)] rounded-b-xl">
+            <h5 class="text-lg font-bold">Attention</h5>
+            <p class="text-sm">Charlie Puth</p>
+          </div>
+        </div>
+      </div>
+      <!-- Song 2 -->
+      <div class="col px-10">
+        <div class="card bg-[#07000f] text-white rounded-xl transition-transform cursor-pointer"
+          onclick="selectSong('apocalypse')">
+          <img src="https://upload.wikimedia.org/wikipedia/en/a/a7/Cigarettes_After_Sex_-_Apocalypse.png"
+            alt="Album Cover 2" class="w-full rounded-t-xl">
+          <div class="p-4 bg-[rgba(255,255,255,0.1)] rounded-b-xl">
+            <h5 class="text-lg font-bold">Apocalypse</h5>
+            <p class="text-sm">CAS</p>
+          </div>
+        </div>
+      </div>
+      <!-- Song 3 -->
+      <div class="col px-10">
+        <div class="card bg-[#07000f] text-white rounded-xl rounded-lg rounded transition-transform cursor-pointer"
+          onclick="selectSong('less_i_know')">
+          <img
+            src="https://cdns-images.dzcdn.net/images/cover/4d9b3ad6489b071bb1aa6d959b1dba53/1900x1900-000000-80-0-0.jpg"
+            alt="Album Cover 3" class="w-full rounded-t-xl">
+          <div class="p-4 bg-[rgba(255,255,255,0.1)] rounded-b-xl">
+            <h5 class="text-lg font-bold">The Less I know the Better</h5>
+            <p class="text-sm">Tame Impala</p>
+          </div>
+        </div>
+      </div>
+      <!-- Song 4 -->
+      <div class="col px-10">
+        <div class="card bg-[#07000f] text-white rounded-xl transition-transform cursor-pointer"
+          onclick="selectSong('beggin')">
+          <img
+            src="https://cdns-images.dzcdn.net/images/cover/355a389b0f2d8766e66fb17e0f9dee01/1900x1900-000000-80-0-0.jpg"
+            alt="Album Cover 4" class="w-full rounded-t-xl">
+          <div class="p-4 bg-[rgba(255,255,255,0.1)] rounded-b-xl">
+            <h5 class="text-lg font-bold">Beggin</h5>
+            <p class="text-sm">Maneskin</p>
+          </div>
+        </div>
+      </div>
+      <!-- Song 5 -->
+      <div class="col px-10">
+        <div class="card bg-[#07000f] text-white rounded-xl transition-transform cursor-pointer"
+          onclick="selectSong('love_theory')">
+          <img
+            src="https://cdns-images.dzcdn.net/images/cover/07876d98103762bdb3caff075ff852de/1900x1900-000000-80-0-0.jpg"
+            alt="Album Cover 5" class="w-full rounded-t-xl">
+          <div class="p-4 bg-[rgba(255,255,255,0.1)] rounded-b-xl">
+            <h5 class="text-lg font-bold">Love Theory</h5>
+            <p class="text-sm">Kirkland</p>
+          </div>
+        </div>
+      </div>
+      <!-- Song 6 -->
+      <div class="col px-10">
+        <div class="card bg-[#07000f] text-white rounded-xl transition-transform cursor-pointer"
+          onclick="selectSong('believer')">
+          <img src="https://cdn-images.dzcdn.net/images/cover/feb7d661b14f4b4950cf8f0b9d433a03/0x1900-000000-80-0-0.jpg"
+            alt="Album Cover 6" class="w-full rounded-t-xl">
+          <div class="p-4 bg-[rgba(255,255,255,0.1)] rounded-b-xl">
+            <h5 class="text-lg font-bold">Believer</h5>
+            <p class="text-sm">Imagine Dragons</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function selectSong(songId) {
+      localStorage.setItem('selectedSongId', songId);
+      window.location.href = `ar.html`;
+    }
+  </script>
+</body>
+
+</html>
