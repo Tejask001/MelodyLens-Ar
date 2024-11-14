@@ -15,6 +15,7 @@
   <a-scene embedded arjs>
     <a-assets>
       <img id="drumsImage" src="./assets/images/drums.png" />
+      <img id="bassImage" src="./assets/images/bass.png" />
       <img id="guitarImage" src="./assets/images/guitar.png" />
       <img id="micImage" src="./assets/images/mic.png" />
       <img id="pianoImage" src="./assets/images/piano.png" />
@@ -22,6 +23,10 @@
 
     <a-marker name="drums" class="ar-marker" type="pattern" url="./assets/patterns/drums.patt">
       <a-image src="#drumsImage" rotation="90 0 0" position="0 0 0" />
+    </a-marker>
+
+    <a-marker name="bass" class="ar-marker" type="pattern" url="./assets/patterns/bass.patt">
+      <a-image src="#bassImage" rotation="90 0 0" />
     </a-marker>
 
     <a-marker name="guitar" class="ar-marker" type="pattern" url="./assets/patterns/guitar.patt">
@@ -43,33 +48,24 @@
     let songId = localStorage.getItem('selectedSongId');
     console.log(songId);
 
-    let guitar = new Howl({
-      src: [`./audio/${songId}/guitar.mp3`]
+    let audioFiles = ['guitar', 'bass', 'mic', 'drums', 'piano'];
+    let audioMap = {};
+    let loadedCount = 0;
+    let totalFiles = audioFiles.length;
+
+    // Initialize Howl objects and set up the onload event
+    audioFiles.forEach((instrument) => {
+      audioMap[instrument] = new Howl({
+        src: [`./audio/${songId}/${instrument}.mp3`],
+        onload: function () {
+          loadedCount++;
+          if (loadedCount === totalFiles) {
+            // All files have loaded, play them in sync
+            Object.values(audioMap).forEach((audio) => audio.play());
+          }
+        }
+      });
     });
-
-    let mic = new Howl({
-      src: [`./audio/${songId}/mic.mp3`]
-    });
-
-    let drums = new Howl({
-      src: [`./audio/${songId}/drums.mp3`]
-    });
-
-    let piano = new Howl({
-      src: [`./audio/${songId}/piano.mp3`]
-    });
-
-    let audioMap = {
-      'guitar': guitar,
-      'drums': drums,
-      'piano': piano,
-      'mic': mic
-    }
-
-    guitar.play();
-    mic.play();
-    drums.play();
-    piano.play();
 
     window.onload = function () {
       let arMarkers = document.getElementsByClassName('ar-marker');
@@ -77,15 +73,19 @@
       Array.from(arMarkers).forEach(function (arMarker) {
         let name = arMarker.getAttribute('name');
         arMarker.addEventListener('markerFound', function () {
-          audioMap[name].mute(false);
+          if (audioMap[name]) {
+            audioMap[name].mute(false);
+          }
         });
         arMarker.addEventListener('markerLost', function () {
-          audioMap[name].mute(true);
+          if (audioMap[name]) {
+            audioMap[name].mute(true);
+          }
         });
       });
     }
-
   </script>
+
 
 </body>
 
